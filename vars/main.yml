@@ -1,4 +1,8 @@
 ---
-nrinfragent_os_name:     "{{ ansible_os_family }}"
-nrinfragent_os_version:  "{{ ansible_lsb.major_release }}"
-nrinfragent_os_codename: "{{ ansible_lsb.codename }}"
+nrinfragent_supported_distros:
+  - Debian
+  - Ubuntu
+  - CentOS
+  - Amazon
+
+nrinfragent_repo_key: 'https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg'

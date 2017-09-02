@@ -4,26 +4,19 @@ galaxy_info:
   description: Role to install New Relic Infrastructure agent
   company: New Relic, Inc.
   license: All components of this product are Copyright (c) 2016 New Relic, Inc.  All rights reserved.
-  min_ansible_version: 2.1
+  min_ansible_version: 2.2
   platforms:
-  - name: EL
+  - name: CentOS
     versions:
-      - 6
       - 7
   - name: Amazon
     versions:
-      - all
+      - 2017.03
   - name: Debian
     versions:
       - wheezy
       - jessie
       - stretch
-      - buster
-  - name: Ubuntu
-    versions:
-      - precise
-      - trusty
-      - xenial
   categories:
     - cloud:ec2
     - monitoring

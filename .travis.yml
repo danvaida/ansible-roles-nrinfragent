@@ -1,0 +1,40 @@
+---
+branches:
+  only:
+    - master
+
+services:
+  - docker
+
+env:
+  - target: wheezy
+    init: "/sbin/init"
+    run_opts: ""
+  - target: jessie
+    init: "/lib/systemd/systemd"
+    run_opts: "--privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - target: stretch
+    init: "/lib/systemd/systemd"
+    run_opts: "--privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - target: centos7
+    init: "/usr/sbin/init"
+    run_opts: "--privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - target: amazonlinux
+    init: "/sbin/init"
+    run_opts: "--privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
+
+before_script:
+  - >
+    docker build --pull --no-cache -t ansible-roles-test-${target}
+    -f tests/support/${target}.Dockerfile tests/support
+
+script:
+  - >
+    docker run -d -v $PWD:/etc/ansible/roles/nrinfragent:ro
+    ${run_opts} --name ${target}
+    --workdir /etc/ansible/roles/nrinfragent/tests
+    ansible-roles-test-${target} ${init}
+  - DOCKER_CONTAINER_ID=$(docker ps --filter name=${target} -q)
+  - >
+    docker exec -t $DOCKER_CONTAINER_ID
+    /bin/bash -xec "bash -x support/run-tests.sh && halt -p"

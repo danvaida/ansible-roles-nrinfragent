@@ -1,0 +1,7 @@
+---
+- name: Testing the idempotence with the default vars
+  hosts: localhost
+  vars:
+    nrinfragent_license_key: 1000000000000000000000000000000000000000
+  roles:
+    - nrinfragent
