@@ -1,2 +1,2 @@
-.vagrant
-.kitchen
+*.swp
+*.retry

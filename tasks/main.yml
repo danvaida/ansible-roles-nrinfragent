@@ -1,4 +1,18 @@
 ---
+- name: Ensuring role compatibility
+  fail:
+    msg: "Distro [{{ ansible_distribution }}] is not supported."
+  when: ansible_distribution not in nrinfragent_supported_distros
 
-# Install and configure agent
+# This is needed because Amazon Linux is not running systemd (like EL 6).
+- set_fact:
+    ansible_lsb:
+      major_release: 6
+  when:
+    - ansible_distribution == "Amazon"
+    - "'2017' in ansible_distribution_version"
+
+- name: Loading distro-based vars
+  include_vars: "{{ ansible_distribution | lower }}.yml"
+
 - include: agent.yml

@@ -1,0 +1,4 @@
+---
+nrinfragent_lsb_package: redhat-lsb-core
+nrinfragent_yum_repo:    "https://download.newrelic.com/infrastructure_agent/linux/yum/el/{{ ansible_lsb.major_release }}/x86_64"
+nrinfragent_yum_repo_desc: 'New Relic Infrastructure'

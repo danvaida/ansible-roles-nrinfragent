@@ -1,0 +1,3 @@
+---
+nrinfragent_lsb_package: lsb-release
+nrinfragent_apt_repo:    "deb [arch=amd64] https://download.newrelic.com/infrastructure_agent/linux/apt {{ ansible_lsb.codename }} main"

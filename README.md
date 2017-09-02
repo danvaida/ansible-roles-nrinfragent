@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/danvaida/ansible-roles-nrinfragent.svg?branch=master)][1]
+
 # nrinfragent
 
 #### Table of Contents
@@ -45,16 +47,6 @@ roles:
 
 ### Role Configuration
 
-#### Variables
-
-##### `nrinfragent_state` (OPTIONAL)
-
-Describes what you want to do with the agent:
-
-* `'latest'` - [default] install the latest version of the agent. Also `present`.
-* `'absent'` - Uninstall the agent.
-
-
 ##### `nrinfragent_version` (OPTIONAL)
 
 What version of the agent do you want to install:
@@ -62,41 +54,10 @@ What version of the agent do you want to install:
 * `'*'`       - [default] install the latest version of the agent.
 * `'X.Y.ZZZ'` - string of the specific version number you want to install, e.g.  1.0.280
 
-##### `nrinfragent_os_name` (OPTIONAL)
-
-Specifies the target OS that the Infrastructure agent will be installed on.
-Defaults to `ansible_os_family`. See list in the `meta/main.yml` file for latest list that is supported.
-
-##### `nrinfragent_os_version` (OPTIONAL)
-
-Specifies the OS version of the installer package needed for this machine.
-Defaults to `ansible_lsb.major_release`. Mostly used for `RedHat` family OSs. See list in the `meta/main.yml` file for latest list.
-
-##### `nrinfragent_os_codename` (OPTIONAL)
-
-Specifies the OS codename of the installer package needed for this machine.
-Defaults to `ansible_lsb.codename`. Mostly used for `Debian` family OSs. See list in the `meta/main.yml` file for latest list.
-
 ##### `nrinfragent_license_key` (REQUIRED)
 
 Specifies the New Relic license key to use.
 
-
-## Limitations
-
-### Platforms
-
-- RHEL
-  - CentOS 7
-  - CentOS 6
-- Ubuntu
-  - 16 Xenial
-  - 14 Trusty
-  - 12 Precise
-- Debian
-  - 10 Buster
-  - 9 Stretch
-  - 8 Jessie
-  - 7 Wheezy
-
 Copyright (c) 2017 New Relic, Inc. All rights reserved.
+
+[1]: https://travis-ci.org/danvaida/ansible-roles-nrinfragent
