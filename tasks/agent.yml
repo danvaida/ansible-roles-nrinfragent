@@ -41,7 +41,19 @@
     repo_gpgcheck: True
     state: present
     description: "{{ nrinfragent_yum_repo_desc }}"
+  register: _nrinfragent_yum_repo
   when: ansible_os_family|lower == 'redhat'
+
+- name: YUM metadata cache should be generated
+  command: >
+    yum -q makecache -y
+     --disablerepo='*'
+     --enablerepo='New-Relic-Infrastructure'
+  args:
+    warn: False
+  when:
+    - ansible_os_family|lower == 'redhat'
+    - _nrinfragent_yum_repo.changed
 
 - name: APT package should be installed
   apt:
