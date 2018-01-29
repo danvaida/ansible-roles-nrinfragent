@@ -7,6 +7,7 @@
 - name: ansible_lsb facts should be re-read
   setup:
     filter: 'ansible_lsb*'
+  when: not ansible_distribution == "Amazon"
 
 - name: APT repo key should be added
   apt_key:

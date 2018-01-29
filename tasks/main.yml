@@ -15,4 +15,4 @@
 - name: Loading distro-based vars
   include_vars: "{{ ansible_distribution | lower }}.yml"
 
-- include: agent.yml
+- import_tasks: agent.yml
