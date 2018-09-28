@@ -3,5 +3,23 @@
   hosts: localhost
   vars:
     nrinfragent_license_key: 1000000000000000000000000000000000000000
+    nrinfragent_config:
+      display_name: awesome-node
+      custom_attributes:
+        env: production
+        team: awesome-team
+        purpose: testing-ansible-role
+
   roles:
     - nrinfragent
+
+  tasks:
+    - name: Debug command should be ran
+      command: 'newrelic-infra --debug'
+      ignore_errors: True
+      changed_when: False
+      register: _nrinfragent_debug
+
+    - name: display_name should be correctly set
+      assert:
+        that: nrinfragent_config.display_name in _nrinfragent_debug.stderr
