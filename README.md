@@ -38,9 +38,17 @@ All typical interactions with `nrinfragent` will be done through role configurat
 
 ```yaml
 ---
-hosts: ap_ne_1
-roles:
-  - { role: nrinfragent, nrinfragent_license_key: YOUR_LICENSE_KEY }
+- hosts: ap_ne_1
+  become: True
+
+  roles:
+    - role: nrinfragent
+      nrinfragent_license_key: YOUR_LICENSE_KEY
+      nrinfragent_config:
+        display_name: awesome-node
+        custom_attributes:
+          env: production
+          team: awesome-team
 ```
 
 ## Reference
@@ -58,6 +66,11 @@ What version of the agent do you want to install:
 
 Specifies the New Relic license key to use.
 
+##### `nrinfragent_config` (OPTIONAL)
+
+See the official docs for available config options [here][2].
+
 Copyright (c) 2017 New Relic, Inc. All rights reserved.
 
 [1]: https://travis-ci.org/danvaida/ansible-roles-nrinfragent
+[2]: https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/configuration/configure-infrastructure-agent
